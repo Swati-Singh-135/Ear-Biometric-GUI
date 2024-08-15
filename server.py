@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, send_from_directory, url_for
 from forms import RegForm
 from flask_uploads import UploadSet, IMAGES, configure_uploads
-
+from quickRun import getFvAndShape
 
 
 app = Flask(__name__)
@@ -22,22 +22,15 @@ def get_file(filename):
 def upload_image():
     form = RegForm()
     if form.validate_on_submit():
-        filename = photos.save(form.photo.data)
-        profile_url = url_for('get_file',filename=filename)
         filename = photos.save(form.earphoto.data)
+        # print('upload/'+filename)
+        ear = getFvAndShape('uploads/'+filename)
         ear_url = url_for('get_file',filename=filename)
-        name = form.name.data
-        fathername = form.fathername.data
-        regno = form.regno.data
-        dob = form.dob.data
-        bloodgroup = form.bloodgroup.data
-        print(fathername,name,regno,dob,bloodgroup)
     else:
-        profile_url = None
         ear_url = None
+        ear = None
 
-    return render_template('registration.html',form=form, profile_url=profile_url, ear_url=ear_url)
+    return render_template('registration.html',form=form, ear_url=ear_url, ear=ear)
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
-    

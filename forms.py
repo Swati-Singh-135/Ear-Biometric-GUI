@@ -8,13 +8,6 @@ photos = UploadSet('photos',IMAGES)
 
 
 class RegForm(FlaskForm):
-    photo = FileField(
-        label="Profile Image",
-        validators=[
-            FileAllowed(photos,'Only images are allowed'),
-            FileRequired('Profile Image Field should not be empty')
-        ]
-    )
     earphoto = FileField(
         label="Ear Image",
         validators=[
@@ -22,33 +15,5 @@ class RegForm(FlaskForm):
             FileRequired('Ear Image Field should not be empty')
         ]
     )
-    name = StringField(
-        label="Name",
-        validators=[
-            validators.InputRequired('Please enter the name')
-        ]
-    )
-    regno = IntegerField(
-        validators=[
-            validators.InputRequired('Please enter the registration number')
-        ]
-    )
-    fathername = StringField(
-        label="Father Name",
-        validators=[
-            validators.InputRequired('Please enter the father\'s name')
-        ]
-    )
-    dob = DateField(
-        label="DOB",
-        validators=[
-            validators.InputRequired('Please enter the date of birth')
-        ]
-    )
-    bloodgroup = StringField(
-        label="Blood Group",
-        validators=[
-            validators.InputRequired('Please enter the blood group')
-        ]
-    )
+
     submit = SubmitField('Submit')
